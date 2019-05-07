@@ -1,31 +1,25 @@
-class jquery {
-  constructor(selector) {
-    let slice = Array.prototype.slice //抽取当前数组中的一段元素组合成一个新数组。
-    let dom = slice.call(document.querySelectorAll(selector)) //返回与指定的选择器匹配的文档中的元素列表，变成数组
-    let len = dom ? dom.length : 0
-    for (let i = 0; i < len; i++) {
-      this[i] = dom[i]
+function loadImg(src) {
+  return new Promise(function (resolve, reject) {
+    let img = document.createElement('img')
+    img.onload = function () {
+      resolve(img)
     }
-    this.length = len
-    this.selector = selector || ''
-  }
-  append(node) {
-    // ...
-  }
-  addClass(name) {
-    // ...
-  }
-  html(data) {
-    // ...
-  }
-  // 省略
+    img.onerror = function () {
+      reject('error')
+    }
+    img.src = src
+  })
 }
-
-window.$ = function (selector) {
-  return new jquery(selector)
-}
-
-var p = $('p')
-console.log(p)
-console.log(p.append())
-console.log(p.addClass())
+let src = 'https://avatars1.githubusercontent.com/u/12479470?s=460&v=4'
+let res = loadImg(src)
+res.then(function (img) {
+  alert(`img's height:${img.height}`)
+  return img
+}).then(function (img) {
+  alert(`img's width:${img.width}`)
+  return img
+}).then(function(img){
+  alert(img.src)
+}).catch(function (ex) {
+  alert(`errorrrrr${ex}`)
+})
