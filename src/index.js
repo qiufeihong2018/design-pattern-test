@@ -1,18 +1,22 @@
-class Adaptee{
-  specificRequest(){
-    return '美国插座'
+class Car {
+  drive() {
+   alert('车能开')
   }
 }
-class Target{
-  constructor(name){
-    this.name=name
-    this.adaptee=new Adaptee
+class Decorator {
+  constructor(car){
+    this.car=car
   }
-  request(){
-    alert(`${this.name}-适配器-${this.adaptee.specificRequest()}`)
+  drive() {
+    this.car.drive()
+    this.sing(car)
+  }
+  sing(car){
+    alert('加一个音箱，来唱歌')
   }
 }
-
-let target=new Target('中国插头')
-
-target.request()//中国插头-适配器-美国插座
+let car=new Car()
+car.drive()
+alert('----')
+let user=new Decorator(car)
+user.drive()
