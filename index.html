@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>qiufeihong前端设计模式</title>
+    <style>
+        .intro {
+            font-size: 100px;
+            color: blue;
+        }
+    </style>
 </head>
+
 <body>
-    <p>qiufeihong前端设计模式1</p>   
-    <p>qiufeihong前端设计模式2</p>    
-    <p>qiufeihong前端设计模式3</p>    
-    <p>qiufeihong前端设计模式4</p>    
-<script type="text/javascript" src="./release/bundle.js"></script></body>
+    <div id='divProxy'>
+        <a href="#">qiufeihong前端设计模式1</a>
+        <a href="#">qiufeihong前端设计模式2</a>
+        <a href="#">qiufeihong前端设计模式3</a>
+        <a href="#">qiufeihong前端设计模式4</a>
+    </div>
+    <script type="text/javascript" src="./release/bundle.js"></script>
+</body>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    $('#divProxy').click(function () {
+        // 1箭头函数
+        // setTimeout(()=> {
+        //     $(this).addClass('intro')
+        // }, 1000)
+        // 2.$.proxy
+        // setTimeout($.proxy(function () {
+        //     $(this).addClass('intro')
+        // }, this), 1000)
+    })
+</script>
+
 </html>
