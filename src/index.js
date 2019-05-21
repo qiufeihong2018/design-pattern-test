@@ -1,21 +1,26 @@
-function readonly(target,name,descriptor){
-  descriptor.writable=false
-  return descriptor
-}
-class People{
-  constructor(name,age){
-    this.name=name
-    this.age=age
+class Star {
+  constructor(name) {
+    this.name = name
+    this.call = this.call(name)
   }
+  play() {
+    console.log(`${this.name}演出真好看`)
+  }
+  call() {
+    console.log(`我可以邀请${this.name}来演出吗`)
+  }
+}
+class ProxyStar {
+  constructor(name) {
+    this.star = new Star(name)
+  }
+  play() {
+    this.star.play()
+  }
+}
+// 测试
+let proxyStar=new ProxyStar('zhuliye')
+proxyStar.play()
 
-  @readonly
-  getName(){
-    alert(`${this.name}是我的名字,${this.age}是我的年龄`)
-  }
-}
-let people=new People('qfh',123)
-people.getName()//qfh是我的名字,123是我的年龄
-people.getName=function(){
-  alert('update')
-}
-//Uncaught TypeError: Cannot assign to read only property 'getName' of object '#<People>'
+// 我可以邀请zhuliye来演出吗
+// zhuliye演出真好看
