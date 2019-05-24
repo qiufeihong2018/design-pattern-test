@@ -1,63 +1,45 @@
-// 明星
-let Star = {
-  name: 'zhuliye',
-  age: '12',
-  height: '167',
-  weight: '90',
-  price: 1230000,
-  phone: 'star_12355553333'
-}
-// 经纪人
-let agent = new Proxy(Star, {
-  get: function (target, key) {
-    if (key === 'phone') {
-      // 返回经纪人电话
-      return 'agent_12355557666'
-    }
-    if (key === 'price') {
-      // 经纪人报价
-      return 2000000
-    }
-    return target[key]
-  },
-  set: function (target, key, val) {
-    if (key === 'cusPrice') {
-      if (val < 1000000) {
-        throw new Error('too low')
-      } else {
-        target[key] = val
-        return true
-      }
-    }
+// 主题，保存状态，状态变化之后触发所有的观察者对象
+class Project {
+  constructor() {
+    this.state = 0
+    this.observers = []
   }
-})
+  getState() {
+    return this.state
+  }
+  setState(state) {
+    this.state = state
+    this.notifyAllObservers()
+  }
+  notifyAllObservers() {
+    this.observers.forEach(observer => {
+      observer.update()
+    })
+  }
+  attach(observer) {
+    this.observers.push(observer)
+  }
+}
+// 观察者
+class Observer {
+  constructor(name, project) {
+    this.name = name
+    this.project = project
+    this.project.attach(this)
+  }
+  update(){
+    console.log(`${this.name},update,state:${this.project.getState()}`)
+  }
+}
 // 测试
-// console.log(agent.name)
-// console.log(agent.age)
-// console.log(agent.weight)
-// console.log(agent.price)
-// console.log(agent.phone)
-// agent.cusPrice=400000
-// console.log(agent.cusPrice)
-// zhuliye
-//   12
-//   90
-//   2000000
-//   agent_12355557666
-// Uncaught Error: too low
+let p=new Project()
 
+let qfh=new Observer('qfh',p)
+let qfh1=new Observer('qfh1',p)
+let qfh2=new Observer('qfh2',p)
 
+// 更新state的值
+p.setState(1)
+p.setState(2)
+p.setState(3)
 
-// console.log(agent.name)
-// console.log(agent.age)
-// console.log(agent.weight)
-// console.log(agent.price)
-// console.log(agent.phone)
-// agent.cusPrice=4000000
-// console.log(agent.cusPrice)
-// zhuliye
-// 12
-//  90
-//  2000000
-//  agent_12355557666
-//  4000000
