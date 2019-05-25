@@ -1,29 +1,31 @@
 const fs = require('fs')
-const readStream = fs.createReadStream('../static/interview.docx')
-
-let total = 0
-readStream.on('data', function (data) {
-  // 打印每一行长度
-  console.log(data.length)
-  total += data.length
+const readLine = require('readline')
+const rl = readLine.createInterface({
+  input: fs.createReadStream('../static/interview.docx')
 })
-readStream.on('end', function () {
-  // 打印总共长度
-  console.log(total)
+let totalLine = 0
+rl.on('line', function (line) {
+  let llen = line.length
+  console.log(llen)
+  totalLine += llen
 })
-
-// 65536
-// 65536
-// 65536
-// 65536
-// 65536
-// 65536
-// 65536
-// 65536
-// 65536
-// 65536
-// 65536
-// 65536
-// 65536
-// 48221
-// 900189
+rl.on('close', function () {
+  console.log(totalLine)
+})
+// 128
+// 93
+// 109
+// 103
+// 151
+// 82
+// 225
+// 129
+// 52
+// 6
+// 93
+// 105
+// 31
+// 270
+// 137
+// 170
+// ……
