@@ -1,17 +1,29 @@
-const EventEmitter = require('events').EventEmitter
-// Car继承事件监听api
-class Car extends EventEmitter {
-  constructor(name) {
-    super()
-    this.name = name
-  }
-}
+const fs = require('fs')
+const readStream = fs.createReadStream('../static/interview.docx')
 
-const car = new Car('aodi')
-// 如要取this，那么就不要用箭头函数，否则作用域不同
-car.on('open', function(){
-  console.log(this.name, '在高速飞驰')
+let total = 0
+readStream.on('data', function (data) {
+  // 打印每一行长度
+  console.log(data.length)
+  total += data.length
+})
+readStream.on('end', function () {
+  // 打印总共长度
+  console.log(total)
 })
 
-car.emit('open')
-// aodi 在高速飞驰
+// 65536
+// 65536
+// 65536
+// 65536
+// 65536
+// 65536
+// 65536
+// 65536
+// 65536
+// 65536
+// 65536
+// 65536
+// 65536
+// 48221
+// 900189
