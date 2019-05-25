@@ -1,14 +1,17 @@
-const EventEmitter=require('events').EventEmitter
+const EventEmitter = require('events').EventEmitter
+// Car继承事件监听api
+class Car extends EventEmitter {
+  constructor(name) {
+    super()
+    this.name = name
+  }
+}
 
-const event=new EventEmitter()
-// 同一个事件上发生的两件事
-event.on('click',res=>{
-  console.log(`qfh${res}`)
-}).on('click',res=>{
-  console.log(`qfh2${res}`)
+const car = new Car('aodi')
+// 如要取this，那么就不要用箭头函数，否则作用域不同
+car.on('open', function(){
+  console.log(this.name, '在高速飞驰')
 })
 
-// 触发监听事件click
-event.emit('click','加油')
-// qfh加油
-// qfh2加油
+car.emit('open')
+// aodi 在高速飞驰
