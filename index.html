@@ -28,31 +28,19 @@
     const list = [1, 23, 43, 54, 12]
     const arr = document.getElementsByTagName('a')
     let $a = $('a')
-
-
-    // jQuery 生成迭代器
+    let map = new Map()
+    map.set('a', 100)
+    map.set('b', 100)
+    // for...of
     function each(node) {
-        $node = $(node)
-        $node.each(function (index, elem) {
-            console.log(index, elem)
-        })
+       for(let i of node){
+           console.log(i)
+       }
     }
-
     each(list)
     each(arr)
     each($a)
-    // 三种遍历
-    // list.forEach(item => {
-    //     console.log(item)
-    // })
-
-    // for (let i = 0; i < arr.length; i++) {
-    //     console.log(arr[i])
-    // }
-
-    // $a.each(function (index, elem) {
-    // console.log(index, elem)
-    // })
+    each(map)
 </script>
 
 </html>
