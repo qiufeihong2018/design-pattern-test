@@ -25,29 +25,34 @@
 </body>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 <script>
-    var callback = $.Callbacks()
-    callback.add(function (some) {
-        console.log(some, '--1')
-    })
-    callback.add(function (some) {
-        console.log(some, '--2')
-    })
-    callback.add(function (some) {
-        console.log(some, '--3')
-    })
-    callback.add(function (some) {
-        console.log(some, '--4')
-    })
-    callback.fire('qfh')
-    callback.fire('hfq')
-    // qfh --1
-    // qfh --2
-    // qfh --3
-    // qfh --4
-    // hfq --1
-    // hfq --2
-    // hfq --3
-    // hfq --4
+    const list = [1, 23, 43, 54, 12]
+    const arr = document.getElementsByTagName('a')
+    let $a = $('a')
+
+
+    // jQuery 生成迭代器
+    function each(node) {
+        $node = $(node)
+        $node.each(function (index, elem) {
+            console.log(index, elem)
+        })
+    }
+
+    each(list)
+    each(arr)
+    each($a)
+    // 三种遍历
+    // list.forEach(item => {
+    //     console.log(item)
+    // })
+
+    // for (let i = 0; i < arr.length; i++) {
+    //     console.log(arr[i])
+    // }
+
+    // $a.each(function (index, elem) {
+    // console.log(index, elem)
+    // })
 </script>
 
 </html>
