@@ -1,41 +1,20 @@
-import StateMachine from 'javascript-state-machine'
-import $ from 'jquery'
-var fsm=new StateMachine({
-    init:'收藏',
-    transitions:[{
-        name:'handleStore',
-        from:'收藏',
-        to:'取消收藏'
-    },{
-        name:'handleDelStore',
-        from:'取消收藏',
-        to:'收藏'
-    }],
-    methods: {
-        onHandleStore:()=>{
-            alert('收藏成功')
-            updateTxt()
-        },
-        onHandleDelStore:()=>{
-            alert('取消收藏成功')
-            updateTxt()        
-        }
+let prototype = {
+    getPerson() {
+        alert(`我是${this.name}，今年${this.age}`)
+    },
+    sayName() {
+        alert('你是天边最美的云彩')
     }
-})
-
-let btn=$('#btn')
-// 按钮点击
-btn.click(function(){
-    fsm.is('收藏')?fsm.handleStore():fsm.handleDelStore()
-})
-
-// 按钮文字更新
-
-function updateTxt(){
-    btn.text(fsm.state)
 }
+// 根据原型创建对象
+let qfh = Object.create(prototype)
+qfh.name = 'qfh'
+qfh.age = 23
+qfh.getPerson()
+qfh.sayName()
 
-// 初始化
-updateTxt()
-
-// methods中的onHandleStore与transitions中的handleStore要对应且首字母大写，表示监听该方法
+let lxl = Object.create(prototype)
+lxl.name = 'lxl'
+lxl.age = 234
+lxl.getPerson()
+lxl.sayName()
