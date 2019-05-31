@@ -1,20 +1,34 @@
-let prototype = {
-    getPerson() {
-        alert(`我是${this.name}，今年${this.age}`)
-    },
-    sayName() {
-        alert('你是天边最美的云彩')
+class Staff{
+    execute(){
+        console.log('入职')
     }
 }
-// 根据原型创建对象
-let qfh = Object.create(prototype)
-qfh.name = 'qfh'
-qfh.age = 23
-qfh.getPerson()
-qfh.sayName()
 
-let lxl = Object.create(prototype)
-lxl.name = 'lxl'
-lxl.age = 234
-lxl.getPerson()
-lxl.sayName()
+class HR{
+    constructor(staff){
+        this.staff=staff
+    }
+    email(){
+        console.log('offer给你了,来入职吧')
+        this.staff.execute()
+    }
+}
+
+class Boss{
+    constructor(hr){
+        this.hr=hr
+    }
+    decree(){
+        console.log('来入职吧')
+        this.hr.email()
+    }
+}
+
+const staff=new Staff()
+const hr=new HR(staff)
+const boss=new Boss(hr)
+boss.decree()
+
+// 来入职吧
+// offer给你了,来入职吧
+// 入职
