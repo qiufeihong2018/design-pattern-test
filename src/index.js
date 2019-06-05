@@ -1,64 +1,53 @@
-// 暂时备份
-class TmpBackup {
-    constructor(content) {
-        this.content = content
+// 买家
+class Buyer {
+    constructor() {
+        this.number = 0
     }
-    getContent() {
-        return this.content
+    setNum(num, m) {
+        this.number = num
+        if (m) {
+            m.setSellerNum()
+        }
     }
 }
-
-// 备份列表
-class Memento {
+// 卖家
+class Seller {
     constructor() {
-        this.list = []
+        this.number = 0
     }
-    add(tmpBackup) {
-        this.list.push(tmpBackup)
-    }
-    get(index) {
-        return this.list[index]
+    setNum(num, m) {
+        this.number = num
+        if (m) {
+            m.setBuyerNum()
+        }
     }
 }
-
-// 编辑器
-class Editor {
-    constructor() {
-        this.content = null
+// 中介者
+class Medium {
+    constructor(buyer, seller) {
+        this.buyer = buyer
+        this.seller = seller
     }
-    setContent(content) {
-        this.content = content
+    setBuyerNum() {
+        let number = this.seller.number
+        this.buyer.setNum(number)
     }
-    getContent() {
-        return this.content
-    }
-    // 保存
-    saveContentToTmpBackup() {
-        return new TmpBackup(this.content)
-    }
-    // 撤销
-    getContentFromTmpBackup(tmpBackup) {
-        this.content = tmpBackup.getContent()
+    setSellerNum() {
+        let number = this.buyer.number
+        this.seller.setNum(number)
     }
 }
 
 // 测试
-let editor=new Editor()
-let memento=new Memento()
-// 先填内容
-editor.setContent('aaaa')
-// 再将内容暂时保存
-let tmp=editor.saveContentToTmpBackup()
-// 最后将内容保存进备忘录
-memento.add(tmp)
-editor.setContent('bbbb')
-editor.setContent('cccc')
-editor.setContent('dddd')
-editor.setContent('eeee')
-editor.setContent('ffff')
-editor.setContent('gggg')
+let buyer = new Buyer()
+let seller = new Seller()
+let medium = new Medium(buyer, seller)
+buyer.setNum(9000000,medium)
+console.log(`买家说出${seller.number}买这套房子`)
+//买家说出9000000买这套房子
 
-console.log(editor.getContent())
-// 撤销到第一条
-editor.getContentFromTmpBackup(memento.get(0))
-console.log(editor.getContent())
+seller.setNum(10000000,medium)
+console.log(`卖家说没有${buyer.number}不卖这套房子`)
+// 卖家说没有10000000不卖这套房子
+
+
